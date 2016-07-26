@@ -18,6 +18,8 @@
 //set up categories for collision
 static const uint32_t projectileCategory     =  0x1 << 0;
 static const uint32_t targetCategory        =  0x1 << 1;
+static const uint32_t headCategory        =  0x1 << 2;
+
 
 @implementation GameScene
 
@@ -125,7 +127,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     
 //    set up collision for projectile
     projectile.physicsBody.categoryBitMask = projectileCategory;
-    projectile.physicsBody.contactTestBitMask = targetCategory;
+    projectile.physicsBody.contactTestBitMask = headCategory | targetCategory;
     projectile.physicsBody.collisionBitMask = 0;
     projectile.physicsBody.usesPreciseCollisionDetection = YES;
     
@@ -173,7 +175,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         //        int actualY = (arc4random() % rangeY) + minY;
         
         //   speed of movement
-        int minDuration = 2.0;
+        int minDuration = 4.0;
         int maxDuration = 4.0;
         
         SKAction * actionMoveUp = [SKAction moveTo:CGPointMake((self.frame.size.width-self.target.size.width/2), maxY) duration:minDuration];
@@ -200,6 +202,15 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.target.physicsBody.categoryBitMask = targetCategory;
         self.target.physicsBody.contactTestBitMask = projectileCategory;
         self.target.physicsBody.collisionBitMask = 0;
+        
+        head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:head.size];
+        head.physicsBody.dynamic = YES;
+        head.physicsBody.affectedByGravity = NO;
+        head.physicsBody.categoryBitMask = headCategory;
+        head.physicsBody.contactTestBitMask = projectileCategory;
+        head.physicsBody.collisionBitMask = 0;
+        
+
     }
     return self;
 }
@@ -209,11 +220,6 @@ static inline CGPoint rwNormalize(CGPoint a) {
 - (SKSpriteNode *)newHead
 {
     SKSpriteNode *head = [[SKSpriteNode alloc] initWithColor:[SKColor orangeColor] size:CGSizeMake(40,40)];
-//    SKAction *blink = [SKAction sequence:@[
-//                                           [SKAction fadeOutWithDuration:0.50],
-//                                           [SKAction fadeInWithDuration:0.50]]];
-//    SKAction *blinkForever = [SKAction repeatActionForever:blink];
-//    [head runAction: blinkForever];
     return head;
 }
 
@@ -234,6 +240,25 @@ static inline CGPoint rwNormalize(CGPoint a) {
     SKAction *blinkTwice = [SKAction repeatAction:blink count:2];
     [self addScoreLabel];
     [self.target runAction:blinkTwice];
+}
+
+- (void)projectile:(SKSpriteNode *)projectile didCollideWithHead:(SKSpriteNode *)head {
+    NSLog(@"Hit Head");
+    [projectile removeFromParent];
+    
+    
+    SKAction *hover = [SKAction sequence:@[
+//                                           [SKAction waitForDuration:0.25],
+                                           [SKAction moveByX:15 y:00 duration:0.05],
+//                                           [SKAction waitForDuration:0.25],
+                                           [SKAction moveByX:-30.0 y:00 duration:0.05],
+                                            [SKAction moveByX:30.0 y:00 duration:0.05],
+                                           [SKAction moveByX:-15.0 y:00 duration:0.05]]];
+    [head runAction: hover];
+    
+    
+    
+    ;
 }
 
 // contact delegate method
@@ -257,7 +282,38 @@ static inline CGPoint rwNormalize(CGPoint a) {
     {
         [self projectile:(SKSpriteNode *) firstBody.node didCollideWithTarget:(SKSpriteNode *) secondBody.node];
     }
+    
+    if (firstBody.categoryBitMask == projectileCategory &&
+             secondBody.categoryBitMask == headCategory)
+    {
+        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithHead:(SKSpriteNode *) secondBody.node];
+    }
+
 }
+
+
+
+//- (void)didBeginContactHead:(SKPhysicsContact *)contact
+//{
+//    SKPhysicsBody *firstBody, *secondBody;
+//    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+//    {
+//        firstBody = contact.bodyA;
+//        secondBody = contact.bodyB;
+//    }
+//    else
+//    {
+//        firstBody = contact.bodyB;
+//        secondBody = contact.bodyA;
+//    }
+//    
+//    if (firstBody.categoryBitMask == projectileCategory &&
+//        secondBody.categoryBitMask == headCategory)
+//    {
+//        NSLog(@"Hit Head 2");
+//        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithHead:(SKSpriteNode *) secondBody.node];
+//    }
+//}
 
 -(void)didSimulatePhysics
 {
