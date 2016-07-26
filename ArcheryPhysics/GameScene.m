@@ -11,7 +11,8 @@
 
 @property NSDate *StartDate;
 @property (nonatomic) SKSpriteNode * target;
-
+@property int score;
+@property int shotsFired;
 @end
 
 //set up categories for collision
@@ -46,6 +47,8 @@ static inline CGPoint rwNormalize(CGPoint a) {
 }
 
 -(void)didMoveToView:(SKView *)view {
+    [self addScoreLabel];
+    [self shotsFiredLabel];
     /* Setup your scene here */
     SKSpriteNode *groundNode = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(view.frame.size.width, 20)];
     groundNode.position = CGPointMake(view.center.x, view.center.y /10);
@@ -59,7 +62,6 @@ static inline CGPoint rwNormalize(CGPoint a) {
     archerNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:archerNode.size];
     NSLog(@"CenterX:%f Center:y %f",view.center.x, view.center.y);
    
-    
     [self addChild:groundNode];
     [self addChild:archerNode];
     
@@ -79,6 +81,11 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    self.shotsFired ++;
+    SKNode *shotsFired = [self childNodeWithName:@"shotsFire"];
+    [shotsFired removeFromParent];
+    [self shotsFiredLabel];
+                          
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:self.StartDate];
     NSLog(@"Time: %f", ti);
     // 1 - Choose one of the touches to work with
@@ -88,7 +95,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     // 2 - Position the projectile
     SKNode *archer = [self childNodeWithName:@"Archer"];
     SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(10, 10)];
-    projectile.position = CGPointMake(archer.position.x+5, archer.position.y+5);
+    projectile.position = CGPointMake(archer.position.x+20, archer.position.y+5);
     // 3 determine projectile offset to position
     CGPoint offset = rwSub(location, projectile.position);
     projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width/2];
@@ -159,9 +166,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         
         
         [self addChild:self.target];
-        
-        SKNode *ground = [self childNodeWithName:@"ground"];
-        //   range of up and down movements for target
+                //   range of up and down movements for target
         int minY = (self.target.size.height / 2) + 20;
         int maxY = (self.frame.size.height - self.target.size.height / 2) - head.size.height;
         int rangeY = maxY - minY;
@@ -215,13 +220,19 @@ static inline CGPoint rwNormalize(CGPoint a) {
 // collision method
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithTarget:(SKSpriteNode *)target {
     NSLog(@"Hit");
-//    [projectile removeFromParent];
+    self.score ++;
+    
+    SKLabelNode *score = (SKLabelNode*)[self childNodeWithName:@"score"];
+    [score removeFromParent];
+    
+    score.text = [NSString stringWithFormat:@"Score: %i", self.score];
+    [projectile removeFromParent];
     SKAction *blink = [SKAction sequence:@[
                                            [SKAction fadeOutWithDuration:0.50],
                                            [SKAction fadeInWithDuration:0.50]]];
     
     SKAction *blinkTwice = [SKAction repeatAction:blink count:2];
-    
+    [self addScoreLabel];
     [self.target runAction:blinkTwice];
 }
 
@@ -248,5 +259,30 @@ static inline CGPoint rwNormalize(CGPoint a) {
     }
 }
 
+-(void)didSimulatePhysics
+{
+    
+    
+}
+-(void)shotsFiredLabel
+{
+    SKNode *score = [self childNodeWithName:@"score"];
+    SKLabelNode *shotsFired = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Shots Fired: %d",self.shotsFired]];
+    
+    shotsFired.position = CGPointMake(score.position.x,score.position.y- 40);
+    shotsFired.fontColor = [UIColor blueColor];
+    shotsFired.name = @"shotsFire";
+    [self addChild:shotsFired];
+}
+
+-(void)addScoreLabel{
+    
+    SKLabelNode *scoreNode = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %d",self.score]];
+    
+    scoreNode.position = CGPointMake(self.view.center.x,self.view.center.y+ 150);
+    scoreNode.fontColor = [UIColor blueColor];
+    scoreNode.name = @"score";
+    [self addChild:scoreNode];
+}
 
 @end
