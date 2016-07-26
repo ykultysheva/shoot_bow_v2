@@ -7,12 +7,16 @@
 //
 
 #import "GameScene.h"
-@interface GameScene()
+@interface GameScene() <SKPhysicsContactDelegate>
 
 @property NSDate *StartDate;
 @property (nonatomic) SKSpriteNode * target;
 
 @end
+
+//set up categories for collision
+static const uint32_t projectileCategory     =  0x1 << 0;
+static const uint32_t targetCategory        =  0x1 << 1;
 
 @implementation GameScene
 
@@ -59,6 +63,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
     [self addChild:groundNode];
     [self addChild:archerNode];
     
+//    set up physics for collision
+    self.physicsWorld.contactDelegate = self;
+    
     
 
 }
@@ -99,7 +106,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     CGPoint direction = rwNormalize(offset);
     
     // 7 - Make it shoot far enough to be guaranteed off screen
-    float forceValue =  ti * 2; //Edit this value to get the desired force.
+    float forceValue =  ti * 3; //Edit this value to get the desired force.
     CGPoint shootAmount = rwMult(direction, forceValue);
     
     //8 - Convert the point to a vector
@@ -108,6 +115,12 @@ static inline CGPoint rwNormalize(CGPoint a) {
     
     //9 - Apply impulse to node.
     [projectile.physicsBody applyImpulse:impulseVector];
+    
+//    set up collision for projectile
+    projectile.physicsBody.categoryBitMask = projectileCategory;
+    projectile.physicsBody.contactTestBitMask = targetCategory;
+    projectile.physicsBody.collisionBitMask = 0;
+    projectile.physicsBody.usesPreciseCollisionDetection = YES;
     
 }
 
@@ -171,6 +184,17 @@ static inline CGPoint rwNormalize(CGPoint a) {
         ////        scaling the target
         //        SKAction *zoomIn = [SKAction scaleTo:0.5 duration:0.25];
         //        [self.target runAction:zoomIn];
+        
+////        set up physics for collision
+//        self.physicsWorld.gravity = CGVectorMake(0,0);
+//        self.physicsWorld.contactDelegate = self;
+        
+        self.target.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.target.size];
+        self.target.physicsBody.dynamic = YES;
+        self.target.physicsBody.affectedByGravity = NO;
+        self.target.physicsBody.categoryBitMask = targetCategory;
+        self.target.physicsBody.contactTestBitMask = projectileCategory;
+        self.target.physicsBody.collisionBitMask = 0;
     }
     return self;
 }
@@ -180,12 +204,49 @@ static inline CGPoint rwNormalize(CGPoint a) {
 - (SKSpriteNode *)newHead
 {
     SKSpriteNode *head = [[SKSpriteNode alloc] initWithColor:[SKColor orangeColor] size:CGSizeMake(40,40)];
+//    SKAction *blink = [SKAction sequence:@[
+//                                           [SKAction fadeOutWithDuration:0.50],
+//                                           [SKAction fadeInWithDuration:0.50]]];
+//    SKAction *blinkForever = [SKAction repeatActionForever:blink];
+//    [head runAction: blinkForever];
+    return head;
+}
+
+// collision method
+- (void)projectile:(SKSpriteNode *)projectile didCollideWithTarget:(SKSpriteNode *)target {
+    NSLog(@"Hit");
+//    [projectile removeFromParent];
     SKAction *blink = [SKAction sequence:@[
                                            [SKAction fadeOutWithDuration:0.50],
                                            [SKAction fadeInWithDuration:0.50]]];
-    SKAction *blinkForever = [SKAction repeatActionForever:blink];
-    [head runAction: blinkForever];
-    return head;
+    
+    SKAction *blinkTwice = [SKAction repeatAction:blink count:2];
+    
+    [self.target runAction:blinkTwice];
 }
+
+// contact delegate method
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    SKPhysicsBody *firstBody, *secondBody;
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    if (firstBody.categoryBitMask == projectileCategory &&
+        secondBody.categoryBitMask == targetCategory)
+    {
+        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithTarget:(SKSpriteNode *) secondBody.node];
+    }
+}
+
 
 @end

@@ -39,6 +39,7 @@
     if (!skView.scene) {
         skView.showsFPS = YES;
         skView.showsNodeCount = YES;
+        skView.showsPhysics = YES;
         
         // Create and configure the scene.
         SKScene * scene = [GameScene sceneWithSize:skView.bounds.size];
