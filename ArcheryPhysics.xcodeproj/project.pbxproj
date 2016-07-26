@@ -1,0 +1,531 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABC7F7D11D47B53F00811646 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D01D47B53F00811646 /* main.m */; };
+		ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D31D47B53F00811646 /* AppDelegate.m */; };
+		ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D61D47B53F00811646 /* GameScene.m */; };
+		ABC7F7D91D47B53F00811646 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = ABC7F7D81D47B53F00811646 /* GameScene.sks */; };
+		ABC7F7DC1D47B53F00811646 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7DB1D47B53F00811646 /* GameViewController.m */; };
+		ABC7F7DF1D47B53F00811646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC7F7DD1D47B53F00811646 /* Main.storyboard */; };
+		ABC7F7E11D47B53F00811646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC7F7E01D47B53F00811646 /* Assets.xcassets */; };
+		ABC7F7E41D47B53F00811646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC7F7E21D47B53F00811646 /* LaunchScreen.storyboard */; };
+		ABC7F7EF1D47B53F00811646 /* ArcheryPhysicsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7EE1D47B53F00811646 /* ArcheryPhysicsTests.m */; };
+		ABC7F7FA1D47B53F00811646 /* ArcheryPhysicsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7F91D47B53F00811646 /* ArcheryPhysicsUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ABC7F7EB1D47B53F00811646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABC7F7C41D47B53F00811646 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABC7F7CB1D47B53F00811646;
+			remoteInfo = ArcheryPhysics;
+		};
+		ABC7F7F61D47B53F00811646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABC7F7C41D47B53F00811646 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABC7F7CB1D47B53F00811646;
+			remoteInfo = ArcheryPhysics;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ABC7F7CC1D47B53F00811646 /* ArcheryPhysics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcheryPhysics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC7F7D01D47B53F00811646 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ABC7F7D21D47B53F00811646 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ABC7F7D31D47B53F00811646 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ABC7F7D51D47B53F00811646 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		ABC7F7D61D47B53F00811646 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		ABC7F7D81D47B53F00811646 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		ABC7F7DA1D47B53F00811646 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		ABC7F7DB1D47B53F00811646 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		ABC7F7DE1D47B53F00811646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ABC7F7E01D47B53F00811646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABC7F7E31D47B53F00811646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ABC7F7E51D47B53F00811646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABC7F7EA1D47B53F00811646 /* ArcheryPhysicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcheryPhysicsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC7F7EE1D47B53F00811646 /* ArcheryPhysicsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArcheryPhysicsTests.m; sourceTree = "<group>"; };
+		ABC7F7F01D47B53F00811646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABC7F7F51D47B53F00811646 /* ArcheryPhysicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcheryPhysicsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC7F7F91D47B53F00811646 /* ArcheryPhysicsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArcheryPhysicsUITests.m; sourceTree = "<group>"; };
+		ABC7F7FB1D47B53F00811646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABC7F7C91D47B53F00811646 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7E71D47B53F00811646 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7F21D47B53F00811646 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABC7F7C31D47B53F00811646 = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7CE1D47B53F00811646 /* ArcheryPhysics */,
+				ABC7F7ED1D47B53F00811646 /* ArcheryPhysicsTests */,
+				ABC7F7F81D47B53F00811646 /* ArcheryPhysicsUITests */,
+				ABC7F7CD1D47B53F00811646 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABC7F7CD1D47B53F00811646 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7CC1D47B53F00811646 /* ArcheryPhysics.app */,
+				ABC7F7EA1D47B53F00811646 /* ArcheryPhysicsTests.xctest */,
+				ABC7F7F51D47B53F00811646 /* ArcheryPhysicsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABC7F7CE1D47B53F00811646 /* ArcheryPhysics */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7D21D47B53F00811646 /* AppDelegate.h */,
+				ABC7F7D31D47B53F00811646 /* AppDelegate.m */,
+				ABC7F7D51D47B53F00811646 /* GameScene.h */,
+				ABC7F7D61D47B53F00811646 /* GameScene.m */,
+				ABC7F7D81D47B53F00811646 /* GameScene.sks */,
+				ABC7F7DA1D47B53F00811646 /* GameViewController.h */,
+				ABC7F7DB1D47B53F00811646 /* GameViewController.m */,
+				ABC7F7DD1D47B53F00811646 /* Main.storyboard */,
+				ABC7F7E01D47B53F00811646 /* Assets.xcassets */,
+				ABC7F7E21D47B53F00811646 /* LaunchScreen.storyboard */,
+				ABC7F7E51D47B53F00811646 /* Info.plist */,
+				ABC7F7CF1D47B53F00811646 /* Supporting Files */,
+			);
+			path = ArcheryPhysics;
+			sourceTree = "<group>";
+		};
+		ABC7F7CF1D47B53F00811646 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7D01D47B53F00811646 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABC7F7ED1D47B53F00811646 /* ArcheryPhysicsTests */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7EE1D47B53F00811646 /* ArcheryPhysicsTests.m */,
+				ABC7F7F01D47B53F00811646 /* Info.plist */,
+			);
+			path = ArcheryPhysicsTests;
+			sourceTree = "<group>";
+		};
+		ABC7F7F81D47B53F00811646 /* ArcheryPhysicsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7F7F91D47B53F00811646 /* ArcheryPhysicsUITests.m */,
+				ABC7F7FB1D47B53F00811646 /* Info.plist */,
+			);
+			path = ArcheryPhysicsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABC7F7CB1D47B53F00811646 /* ArcheryPhysics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC7F7FE1D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysics" */;
+			buildPhases = (
+				ABC7F7C81D47B53F00811646 /* Sources */,
+				ABC7F7C91D47B53F00811646 /* Frameworks */,
+				ABC7F7CA1D47B53F00811646 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArcheryPhysics;
+			productName = ArcheryPhysics;
+			productReference = ABC7F7CC1D47B53F00811646 /* ArcheryPhysics.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABC7F7E91D47B53F00811646 /* ArcheryPhysicsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC7F8011D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsTests" */;
+			buildPhases = (
+				ABC7F7E61D47B53F00811646 /* Sources */,
+				ABC7F7E71D47B53F00811646 /* Frameworks */,
+				ABC7F7E81D47B53F00811646 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABC7F7EC1D47B53F00811646 /* PBXTargetDependency */,
+			);
+			name = ArcheryPhysicsTests;
+			productName = ArcheryPhysicsTests;
+			productReference = ABC7F7EA1D47B53F00811646 /* ArcheryPhysicsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ABC7F7F41D47B53F00811646 /* ArcheryPhysicsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC7F8041D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsUITests" */;
+			buildPhases = (
+				ABC7F7F11D47B53F00811646 /* Sources */,
+				ABC7F7F21D47B53F00811646 /* Frameworks */,
+				ABC7F7F31D47B53F00811646 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABC7F7F71D47B53F00811646 /* PBXTargetDependency */,
+			);
+			name = ArcheryPhysicsUITests;
+			productName = ArcheryPhysicsUITests;
+			productReference = ABC7F7F51D47B53F00811646 /* ArcheryPhysicsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABC7F7C41D47B53F00811646 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "JOSE PILAPIL";
+				TargetAttributes = {
+					ABC7F7CB1D47B53F00811646 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					ABC7F7E91D47B53F00811646 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = ABC7F7CB1D47B53F00811646;
+					};
+					ABC7F7F41D47B53F00811646 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = ABC7F7CB1D47B53F00811646;
+					};
+				};
+			};
+			buildConfigurationList = ABC7F7C71D47B53F00811646 /* Build configuration list for PBXProject "ArcheryPhysics" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABC7F7C31D47B53F00811646;
+			productRefGroup = ABC7F7CD1D47B53F00811646 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABC7F7CB1D47B53F00811646 /* ArcheryPhysics */,
+				ABC7F7E91D47B53F00811646 /* ArcheryPhysicsTests */,
+				ABC7F7F41D47B53F00811646 /* ArcheryPhysicsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABC7F7CA1D47B53F00811646 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC7F7D91D47B53F00811646 /* GameScene.sks in Resources */,
+				ABC7F7E41D47B53F00811646 /* LaunchScreen.storyboard in Resources */,
+				ABC7F7E11D47B53F00811646 /* Assets.xcassets in Resources */,
+				ABC7F7DF1D47B53F00811646 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7E81D47B53F00811646 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7F31D47B53F00811646 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABC7F7C81D47B53F00811646 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC7F7DC1D47B53F00811646 /* GameViewController.m in Sources */,
+				ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */,
+				ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */,
+				ABC7F7D11D47B53F00811646 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7E61D47B53F00811646 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC7F7EF1D47B53F00811646 /* ArcheryPhysicsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7F7F11D47B53F00811646 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC7F7FA1D47B53F00811646 /* ArcheryPhysicsUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABC7F7EC1D47B53F00811646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABC7F7CB1D47B53F00811646 /* ArcheryPhysics */;
+			targetProxy = ABC7F7EB1D47B53F00811646 /* PBXContainerItemProxy */;
+		};
+		ABC7F7F71D47B53F00811646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABC7F7CB1D47B53F00811646 /* ArcheryPhysics */;
+			targetProxy = ABC7F7F61D47B53F00811646 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ABC7F7DD1D47B53F00811646 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABC7F7DE1D47B53F00811646 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ABC7F7E21D47B53F00811646 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABC7F7E31D47B53F00811646 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABC7F7FC1D47B53F00811646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ABC7F7FD1D47B53F00811646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABC7F7FF1D47B53F00811646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ArcheryPhysics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABC7F8001D47B53F00811646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ArcheryPhysics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ABC7F8021D47B53F00811646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = ArcheryPhysicsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysicsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArcheryPhysics.app/ArcheryPhysics";
+			};
+			name = Debug;
+		};
+		ABC7F8031D47B53F00811646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ArcheryPhysicsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysicsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArcheryPhysics.app/ArcheryPhysics";
+			};
+			name = Release;
+		};
+		ABC7F8051D47B53F00811646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = ArcheryPhysicsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysicsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ArcheryPhysics;
+			};
+			name = Debug;
+		};
+		ABC7F8061D47B53F00811646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ArcheryPhysicsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysicsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ArcheryPhysics;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABC7F7C71D47B53F00811646 /* Build configuration list for PBXProject "ArcheryPhysics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC7F7FC1D47B53F00811646 /* Debug */,
+				ABC7F7FD1D47B53F00811646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABC7F7FE1D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC7F7FF1D47B53F00811646 /* Debug */,
+				ABC7F8001D47B53F00811646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ABC7F8011D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC7F8021D47B53F00811646 /* Debug */,
+				ABC7F8031D47B53F00811646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ABC7F8041D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC7F8051D47B53F00811646 /* Debug */,
+				ABC7F8061D47B53F00811646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABC7F7C41D47B53F00811646 /* Project object */;
+}
