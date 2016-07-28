@@ -7,20 +7,23 @@
 //
 
 #import "GameScene.h"
+#import "Obstacle.h"
+#import "Target.h"
+#import "Head.h"
+
 @interface GameScene() <SKPhysicsContactDelegate>
 
+@property NSTimer *powerBarTimer;
 @property NSDate *StartDate;
-@property (nonatomic) SKSpriteNode * target;
-@property (nonatomic) SKSpriteNode * obstacle;
-@property int score;
+@property (nonatomic) Target * target;
+@property (nonatomic) Obstacle * obstacle;
+@property (nonatomic) Head * head;
 @property int shotsFired;
+
 @end
 
 //set up categories for collision
-static const uint32_t projectileCategory     =  0x1 << 0;
-static const uint32_t targetCategory        =  0x1 << 1;
-static const uint32_t headCategory        =  0x1 << 2;
-static const uint32_t obstacleCategory        =  0x1 << 3;
+
 
 
 @implementation GameScene
@@ -80,11 +83,32 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     NSLog(@"touchBegan");
+    SKSpriteNode *archer = (SKSpriteNode*)[self childNodeWithName:@"Archer"];
+    SKSpriteNode *powerBar = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(10, 10)];
+    powerBar.position = CGPointMake(archer.position.x, archer.position.y + 40);
+    powerBar.name = @"Powerbar";
+    powerBar.anchorPoint = CGPointMake(0.5, 0.0);
+    [self addChild:powerBar];
+    self.powerBarTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(handlePowerUp:) userInfo:nil repeats:NO];
+    
     self.StartDate = [NSDate date];
 }
 
+-(void)handlePowerUp:(id)sender
+{
+    NSLog(@"Being handled");
+    SKAction *increaseHeight = [SKAction scaleXBy:1 y:10 duration:1];
+    
+    SKSpriteNode *powerBar = (SKSpriteNode*)[self childNodeWithName:@"Powerbar"];
+    [powerBar runAction:increaseHeight];
+}
+
+
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    SKSpriteNode *powerBar = (SKSpriteNode*)[self childNodeWithName:@"Powerbar"];
+    [powerBar removeFromParent];
+    
     self.shotsFired ++;
     SKNode *shotsFired = [self childNodeWithName:@"shotsFire"];
     [shotsFired removeFromParent];
@@ -150,91 +174,41 @@ static inline CGPoint rwNormalize(CGPoint a) {
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
-        // 2
+//        setting up view
         NSLog(@"Size: %@", NSStringFromCGSize(size));
-        
-        // 3
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
-        // 4
-        //        self.target = [SKSpriteNode spriteNodeWithImageNamed:@"target"];
+//        set up physics for collision
+        self.physicsWorld.contactDelegate = self;
+
         
-        self.target = [[SKSpriteNode alloc] initWithColor:[SKColor redColor] size:CGSizeMake(40,80)];
+// target object
         
-        self.target.position = CGPointMake((self.frame.size.width-self.target.size.width/2), self.frame.size.height/2);
-        
-        //        adding head to the target
-        SKSpriteNode *head = [self newHead];
-        head.position = CGPointMake(0.0, 60.0);
-        [self.target addChild:head];
-        
-        
+        self.target = [[Target alloc ]init];
+        self.target.sceneFrame = self.frame;
+        self.target.gameScene = self;
+        [self.target setUpTarget];
         [self addChild:self.target];
-                //   range of up and down movements for target
-        int minY = (self.target.size.height / 2) + 20;
-        int maxY = (self.frame.size.height - self.target.size.height / 2) - head.size.height;
-//        int rangeY = maxY - minY;
-        //        int actualY = (arc4random() % rangeY) + minY;
-        
-        //   speed of movement
-        int minDuration = 4.0;
-        int maxDuration = 4.0;
-        
-        SKAction * actionMoveUp = [SKAction moveTo:CGPointMake((self.frame.size.width-self.target.size.width/2), maxY) duration:minDuration];
-        
-        SKAction * actionMoveDown = [SKAction moveTo:CGPointMake((self.frame.size.width-self.target.size.width/2), minY) duration:minDuration];
-        
-        SKAction *updown = [SKAction sequence:@[actionMoveUp, actionMoveDown]];
-        
-        SKAction *updownForever = [SKAction repeatActionForever:updown];
-        
-        [self.target runAction: updownForever];
-        
-        ////        scaling the target
-        //        SKAction *zoomIn = [SKAction scaleTo:0.5 duration:0.25];
-        //        [self.target runAction:zoomIn];
-        
-////        set up physics for collision
-//        self.physicsWorld.gravity = CGVectorMake(0,0);
-//        self.physicsWorld.contactDelegate = self;
-        
-        self.target.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.target.size];
-        self.target.physicsBody.dynamic = YES;
-        self.target.physicsBody.affectedByGravity = NO;
-        self.target.physicsBody.categoryBitMask = targetCategory;
-        self.target.physicsBody.contactTestBitMask = projectileCategory;
-        self.target.physicsBody.collisionBitMask = 0;
-        
-        head.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:head.size];
-        head.physicsBody.dynamic = YES;
-        head.physicsBody.affectedByGravity = NO;
-        head.physicsBody.categoryBitMask = headCategory;
-        head.physicsBody.contactTestBitMask = projectileCategory;
-        head.physicsBody.collisionBitMask = 0;
+        [self.target startUpDownTarget];
+
+// head object
+ 
+        self.head = [[Head alloc] init];
+        self.head.sceneFrame = self.frame;
+        self.head.gameScene = self;
+        [self.head setUpHead];
+        [self.target addChild:self.head];
+
         
         
-//        obstacle object
-        self.obstacle = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(40,40)];
-        self.obstacle.position = CGPointMake(self.frame.size.width/4*3, self.frame.size.height/2);
+//obstacle object
+        
+        self.obstacle = [[Obstacle alloc ]init];
+        self.obstacle.sceneFrame = self.frame;
+        self.obstacle.gameScene = self;
+        [self.obstacle setUpObst];
+        [self.obstacle startUpDown];
         [self addChild:self.obstacle];
-        int minYobst = (self.obstacle.size.height / 2) + 20;
-        int maxYobst = (self.frame.size.height - self.obstacle.size.height / 2);
-        int durationObst = 1.5;
-        SKAction * actionMoveUpObst = [SKAction moveTo:CGPointMake((self.frame.size.width/4*3), maxYobst) duration:durationObst];
-        SKAction * actionMoveDownObst = [SKAction moveTo:CGPointMake((self.frame.size.width/4*3), minYobst) duration:durationObst];
-        SKAction *updownObst = [SKAction sequence:@[actionMoveDownObst, actionMoveUpObst]];
-        SKAction *updownForeverObst = [SKAction repeatActionForever:updownObst];
-        [self.obstacle runAction: updownForeverObst];
-        
-        self.obstacle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.obstacle.size];
-        self.obstacle.physicsBody.dynamic = YES;
-        self.obstacle.physicsBody.affectedByGravity = NO;
-        self.obstacle.physicsBody.categoryBitMask = obstacleCategory;
-        self.obstacle.physicsBody.contactTestBitMask = projectileCategory;
-        self.obstacle.physicsBody.collisionBitMask = 0;
-
-
-        
         
 
     }
@@ -242,54 +216,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
 }
 
 
-//initialize head
-- (SKSpriteNode *)newHead
-{
-    SKSpriteNode *head = [[SKSpriteNode alloc] initWithColor:[SKColor orangeColor] size:CGSizeMake(40,40)];
-    return head;
-}
 
-// collision method
-- (void)projectile:(SKSpriteNode *)projectile didCollideWithTarget:(SKSpriteNode *)target {
-    NSLog(@"Hit");
-    self.score ++;
-    
-    SKLabelNode *score = (SKLabelNode*)[self childNodeWithName:@"score"];
-    [score removeFromParent];
-    
-    score.text = [NSString stringWithFormat:@"Score: %i", self.score];
-    [projectile removeFromParent];
-    SKAction *blink = [SKAction sequence:@[
-                                           [SKAction fadeOutWithDuration:0.50],
-                                           [SKAction fadeInWithDuration:0.50]]];
-    
-    SKAction *blinkTwice = [SKAction repeatAction:blink count:2];
-    [self addScoreLabel];
-    [self.target runAction:blinkTwice];
-}
-
-- (void)projectile:(SKSpriteNode *)projectile didCollideWithHead:(SKSpriteNode *)head {
-    NSLog(@"Hit Head");
-    [projectile removeFromParent];
-    
-    SKAction *hover = [SKAction sequence:@[
-//                                           [SKAction waitForDuration:0.25],
-                                           [SKAction moveByX:15 y:00 duration:0.05],
-//                                           [SKAction waitForDuration:0.25],
-                                           [SKAction moveByX:-30.0 y:00 duration:0.05],
-                                            [SKAction moveByX:30.0 y:00 duration:0.05],
-                                           [SKAction moveByX:-15.0 y:00 duration:0.05]]];
-    [head runAction: hover];
-}
-
-- (void)projectile:(SKSpriteNode *)projectile didCollideWithObst:(SKSpriteNode *)obsticle {
-    NSLog(@"Hit obsticle");
-    [projectile removeFromParent];
-    
-    SKAction *zoomInOut = [SKAction sequence:@[[SKAction scaleTo:0.5 duration:0.1],
-                                               [SKAction scaleTo: 1.0 duration:0.1]]];
-    [self.obstacle runAction: zoomInOut];
-}
 
 
 // contact delegate method
@@ -311,19 +238,19 @@ static inline CGPoint rwNormalize(CGPoint a) {
     if (firstBody.categoryBitMask == projectileCategory &&
         secondBody.categoryBitMask == targetCategory)
     {
-        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithTarget:(SKSpriteNode *) secondBody.node];
+        [self.target projectile:(SKSpriteNode *) firstBody.node didCollideWithTarget:(SKSpriteNode *) secondBody.node];
     }
     
     if (firstBody.categoryBitMask == projectileCategory &&
              secondBody.categoryBitMask == headCategory)
     {
-        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithHead:(SKSpriteNode *) secondBody.node];
+        [self.head projectile:(SKSpriteNode *) firstBody.node didCollideWithHead:(SKSpriteNode *) secondBody.node];
     }
     
     if (firstBody.categoryBitMask == projectileCategory &&
         secondBody.categoryBitMask == obstacleCategory)
     {
-        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithObst:(SKSpriteNode *) secondBody.node];
+        [self.obstacle projectile:(SKSpriteNode *) firstBody.node didCollideWithObst:(SKSpriteNode *) secondBody.node];
     }
 
 }

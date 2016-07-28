@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9726CC5E1D49622A000FE536 /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726CC5D1D49622A000FE536 /* Target.m */; };
+		9726CC611D497323000FE536 /* Head.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726CC601D497323000FE536 /* Head.m */; };
+		9767385C1D49278F00158C06 /* Obstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9767385B1D49278F00158C06 /* Obstacle.m */; };
 		ABC7F7D11D47B53F00811646 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D01D47B53F00811646 /* main.m */; };
 		ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D31D47B53F00811646 /* AppDelegate.m */; };
 		ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D61D47B53F00811646 /* GameScene.m */; };
@@ -37,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9726CC5C1D49622A000FE536 /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		9726CC5D1D49622A000FE536 /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		9726CC5F1D497323000FE536 /* Head.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Head.h; sourceTree = "<group>"; };
+		9726CC601D497323000FE536 /* Head.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Head.m; sourceTree = "<group>"; };
+		9767385A1D49278F00158C06 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
+		9767385B1D49278F00158C06 /* Obstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Obstacle.m; sourceTree = "<group>"; };
 		ABC7F7CC1D47B53F00811646 /* ArcheryPhysics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcheryPhysics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7F7D01D47B53F00811646 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABC7F7D21D47B53F00811646 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -113,6 +122,12 @@
 				ABC7F7D81D47B53F00811646 /* GameScene.sks */,
 				ABC7F7DA1D47B53F00811646 /* GameViewController.h */,
 				ABC7F7DB1D47B53F00811646 /* GameViewController.m */,
+				9767385A1D49278F00158C06 /* Obstacle.h */,
+				9726CC5C1D49622A000FE536 /* Target.h */,
+				9726CC5F1D497323000FE536 /* Head.h */,
+				9726CC601D497323000FE536 /* Head.m */,
+				9726CC5D1D49622A000FE536 /* Target.m */,
+				9767385B1D49278F00158C06 /* Obstacle.m */,
 				ABC7F7DD1D47B53F00811646 /* Main.storyboard */,
 				ABC7F7E01D47B53F00811646 /* Assets.xcassets */,
 				ABC7F7E21D47B53F00811646 /* LaunchScreen.storyboard */,
@@ -280,7 +295,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC7F7DC1D47B53F00811646 /* GameViewController.m in Sources */,
+				9726CC611D497323000FE536 /* Head.m in Sources */,
 				ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */,
+				9726CC5E1D49622A000FE536 /* Target.m in Sources */,
+				9767385C1D49278F00158C06 /* Obstacle.m in Sources */,
 				ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */,
 				ABC7F7D11D47B53F00811646 /* main.m in Sources */,
 			);
@@ -508,6 +526,7 @@
 				ABC7F8001D47B53F00811646 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABC7F8011D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsTests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +535,7 @@
 				ABC7F8031D47B53F00811646 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABC7F8041D47B53F00811646 /* Build configuration list for PBXNativeTarget "ArcheryPhysicsUITests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +544,7 @@
 				ABC7F8061D47B53F00811646 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
