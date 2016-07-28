@@ -116,6 +116,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
                           
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:self.StartDate];
     NSLog(@"Time: %f", ti);
+    if (ti > 1.5){
+        ti = 1.5;
+    }
     // 1 - Choose one of the touches to work with
     UITouch * touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
@@ -207,7 +210,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.obstacle.sceneFrame = self.frame;
         self.obstacle.gameScene = self;
         [self.obstacle setUpObst];
-        [self.obstacle startUpDown];
+//        [self.obstacle startUpDown];
         [self addChild:self.obstacle];
         
 

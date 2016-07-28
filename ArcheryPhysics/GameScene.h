@@ -16,4 +16,5 @@ static const uint32_t obstacleCategory        =  0x1 << 3;
 @interface GameScene : SKScene
 @property int score;
 -(void)addScoreLabel;
+-(void)startUpDownSpawned;
 @end
