@@ -19,6 +19,7 @@
 @property (nonatomic) Obstacle * obstacle;
 @property (nonatomic) Head * head;
 @property int shotsFired;
+@property int testNum;
 
 @end
 
@@ -75,8 +76,8 @@ static inline CGPoint rwNormalize(CGPoint a) {
 //    set up physics for collision
     self.physicsWorld.contactDelegate = self;
     
+    self.testNum = 1;
     
-
 }
 
 
@@ -170,6 +171,22 @@ static inline CGPoint rwNormalize(CGPoint a) {
 }
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    if (self.score >= 2 && self.testNum == 1 ) {
+        [self.target startUpDownTarget];
+        self.testNum = 0;
+    }
+    
+    if (self.score >=4 && self.testNum == 0) {
+        
+        self.obstacle = [[Obstacle alloc ]init];
+        self.obstacle.sceneFrame = self.frame;
+        self.obstacle.gameScene = self;
+        [self.obstacle setUpObst];
+        [self.obstacle startUpDown];
+        [self addChild:self.obstacle];
+        self.testNum = 2;
+    }
+
 }
 
 // YANA'S CODE:
@@ -183,6 +200,8 @@ static inline CGPoint rwNormalize(CGPoint a) {
         
 //        set up physics for collision
         self.physicsWorld.contactDelegate = self;
+        
+        
 
         
 // target object
@@ -192,7 +211,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.target.gameScene = self;
         [self.target setUpTarget];
         [self addChild:self.target];
-        [self.target startUpDownTarget];
+        
+
+        
 
 // head object
  
@@ -206,17 +227,20 @@ static inline CGPoint rwNormalize(CGPoint a) {
         
 //obstacle object
         
-        self.obstacle = [[Obstacle alloc ]init];
-        self.obstacle.sceneFrame = self.frame;
-        self.obstacle.gameScene = self;
-        [self.obstacle setUpObst];
+//        self.obstacle = [[Obstacle alloc ]init];
+//        self.obstacle.sceneFrame = self.frame;
+//        self.obstacle.gameScene = self;
+//        [self.obstacle setUpObst];
 //        [self.obstacle startUpDown];
-        [self addChild:self.obstacle];
+//        [self addChild:self.obstacle];
         
 
     }
     return self;
 }
+
+
+
 
 
 

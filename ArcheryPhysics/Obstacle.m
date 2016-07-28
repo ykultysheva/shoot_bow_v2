@@ -37,13 +37,6 @@
 - (void)setUpObst {
     
     self.position = CGPointMake(self.sceneFrame.size.width/4*3, self.sceneFrame.size.height/2);
-//    
-//    self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
-//    self.physicsBody.dynamic = YES;
-//    self.physicsBody.affectedByGravity = NO;
-//    self.physicsBody.categoryBitMask = obstacleCategory;
-//    self.physicsBody.contactTestBitMask = projectileCategory;
-//    self.physicsBody.collisionBitMask = 0;
 
 }
 
@@ -61,21 +54,23 @@
     [self runAction: updownForeverObst];
 }
 
-
 -(void)startUpDownSpawned {
     
-    [self.gameScene enumerateChildNodesWithName:@"//SpawnedObstacle" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
+    [self enumerateChildNodesWithName:@"//SpawnedObstacle" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
         //  set  up and down movements
-        int minYobst = (node.frame.size.height / 2) + 20;
-        int maxYobst = (self.sceneFrame.size.height - node.frame.size.height / 2);
+        int minYobst = 20;
+        int maxYobst = 300;
         int durationObst = 1.5;
-        SKAction * actionMoveUpObst = [SKAction moveTo:CGPointMake((node.frame.origin.x), maxYobst) duration:durationObst];
-        SKAction * actionMoveDownObst = [SKAction moveTo:CGPointMake((node.frame.origin.x), minYobst) duration:durationObst];
-        SKAction *updownObst = [SKAction sequence:@[actionMoveDownObst, actionMoveUpObst]];
+        SKAction * actionMoveUpObst = [SKAction moveByX:0 y:200 duration:.75];
+        SKAction * actionMoveDownObst = [SKAction moveByX:0 y:-400 duration:.75];
+        SKAction *updownObst = [SKAction sequence:@[actionMoveUpObst, actionMoveDownObst, actionMoveUpObst]];
         SKAction *updownForeverObst = [SKAction repeatActionForever:updownObst];
         [node runAction: updownForeverObst];
     }];
 }
+
+
+
 
 
 
@@ -86,11 +81,13 @@
                                                [SKAction scaleTo: 1.0 duration:0.1]]];
     [self runAction: zoomInOut];
   
-//    substruct scoer
+
     self.gameScene.score --;
     SKLabelNode *score = (SKLabelNode*)[self.gameScene childNodeWithName:@"score"];
     score.text = [NSString stringWithFormat:@"Score: %i", self.gameScene.score];
     
+  
+//    create new obstacle
     
     self.spawnedObstacle = [[Obstacle alloc ]init];
     
@@ -99,12 +96,14 @@
     int rangeX = maxX - minX;
     int actualX = (arc4random() % rangeX) + minX;
     
+    int minY = (self.spawnedObstacle.size.height / 2) + 20;
+    int maxY = (self.sceneFrame.size.height - self.spawnedObstacle.size.height / 2);
+    int rangeY = maxY - minY;
+    int actualY = (arc4random() % rangeY) + minY;
     
-    self.spawnedObstacle.position = CGPointMake(actualX, self.sceneFrame.size.height/2);
+    self.spawnedObstacle.position = CGPointMake(actualX, self.gameScene.frame.size.height/2);
     self.spawnedObstacle.name = @"SpawnedObstacle";
     [self.gameScene addChild:self.spawnedObstacle];
-    
-    
     [self.spawnedObstacle startUpDownSpawned];
     
 }
