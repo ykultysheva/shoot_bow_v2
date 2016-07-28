@@ -16,4 +16,5 @@
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithObst:(SKSpriteNode *)obstacle;
 @property (nonatomic) CGRect sceneFrame;
 @property (nonatomic, weak) GameScene *gameScene;
+@property Obstacle* spawnedObstacle;
 @end

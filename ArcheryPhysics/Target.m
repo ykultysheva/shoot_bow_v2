@@ -55,6 +55,8 @@
 
 // collision method
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithTarget:(SKSpriteNode *)target {
+    SKSpriteNode *obstacle = (SKSpriteNode*)[self childNodeWithName:@"//SpawnedObstacle"];
+    [obstacle removeFromParent];
     NSLog(@"Hit Body");
     
 //    add score

@@ -33,6 +33,9 @@
     NSLog(@"Hit Head");
     [projectile removeFromParent];
     
+    SKSpriteNode *obstacle = (SKSpriteNode*)[self childNodeWithName:@"//SpawnedObstacle"];
+    [obstacle removeFromParent];
+    
     SKAction *hover = [SKAction sequence:@[
                                            
                                            [SKAction moveByX:15 y:00 duration:0.05],

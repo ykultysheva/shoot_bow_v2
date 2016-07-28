@@ -17,4 +17,5 @@ static const uint32_t obstacleCategory        =  0x1 << 3;
 @property int score;
 -(void)addScoreLabel;
 -(void)startUpDownSpawned;
+
 @end

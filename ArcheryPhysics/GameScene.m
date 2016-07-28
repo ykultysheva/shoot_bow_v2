@@ -20,6 +20,7 @@
 @property (nonatomic) Head * head;
 @property int shotsFired;
 @property int testNum;
+@property Obstacle* spawnedObstacle;
 
 @end
 
@@ -186,6 +187,11 @@ static inline CGPoint rwNormalize(CGPoint a) {
         [self addChild:self.obstacle];
         self.testNum = 2;
     }
+    
+    if ([self children].count == 30) {
+        // swith to the game over scene 
+    }
+
 
 }
 

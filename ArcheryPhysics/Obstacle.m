@@ -11,7 +11,7 @@
 
 @interface Obstacle ()
 
-@property Obstacle* spawnedObstacle;
+//@property Obstacle* spawnedObstacle;
 
 @end
 
