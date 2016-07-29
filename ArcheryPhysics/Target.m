@@ -8,6 +8,7 @@
 
 #import "Target.h"
 #import "GameScene.h"
+#import "GameData.h"
 
 @implementation Target
 
@@ -55,15 +56,14 @@
 
 // collision method
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithTarget:(SKSpriteNode *)target {
+    
+    SKAction *soundAction = [SKAction playSoundFileNamed:@"ping.wav" waitForCompletion:NO];
+    [self runAction:soundAction];
     SKSpriteNode *obstacle = (SKSpriteNode*)[self childNodeWithName:@"//SpawnedObstacle"];
     [obstacle removeFromParent];
     NSLog(@"Hit Body");
     
 //    add score
-    self.gameScene.score ++;
-    SKLabelNode *score = (SKLabelNode*)[self.gameScene childNodeWithName:@"score"];
-    score.text = [NSString stringWithFormat:@"Score: %i", self.gameScene.score];
-
     [projectile removeFromParent];
     
     SKAction *blink = [SKAction sequence:@[

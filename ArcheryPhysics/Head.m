@@ -8,6 +8,7 @@
 
 #import "Head.h"
 #import "GameScene.h"
+#import "GameData.h"
 
 @implementation Head
 
@@ -31,6 +32,8 @@
 
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithHead:(SKSpriteNode *)head {
     NSLog(@"Hit Head");
+    SKAction *soundAction = [SKAction playSoundFileNamed:@"ping.wav" waitForCompletion:NO];
+    [self runAction:soundAction];
     [projectile removeFromParent];
     
     SKSpriteNode *obstacle = (SKSpriteNode*)[self childNodeWithName:@"//SpawnedObstacle"];
@@ -44,10 +47,6 @@
                                            [SKAction moveByX:-15.0 y:00 duration:0.05]]];
     [head runAction: hover];
     
-//    add score
-    self.gameScene.score ++;
-    SKLabelNode *score = (SKLabelNode*)[self.gameScene childNodeWithName:@"score"];
-    score.text = [NSString stringWithFormat:@"Score: %i", self.gameScene.score];
     
 }
 

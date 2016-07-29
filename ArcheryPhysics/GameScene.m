@@ -6,27 +6,33 @@
 //  Copyright (c) 2016 JOSE PILAPIL. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "GameScene.h"
 #import "Obstacle.h"
 #import "Target.h"
 #import "Head.h"
+#import "GameOverScene.h"
+#import "Castle.h"
+#import "GameData.h"
 
 @interface GameScene() <SKPhysicsContactDelegate>
-
+@property BOOL castleActive;
 @property NSTimer *powerBarTimer;
 @property NSDate *StartDate;
 @property (nonatomic) Target * target;
 @property (nonatomic) Obstacle * obstacle;
 @property (nonatomic) Head * head;
-@property int shotsFired;
 @property int testNum;
 @property Obstacle* spawnedObstacle;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (nonatomic) int counter;
+
 
 @end
 
 //set up categories for collision
-
-
+SKLabelNode* _score;
+SKLabelNode* _highScore;
 
 @implementation GameScene
 
@@ -55,11 +61,15 @@ static inline CGPoint rwNormalize(CGPoint a) {
     return CGPointMake(a.x / length, a.y / length);
 }
 
--(void)didMoveToView:(SKView *)view {
-    [self addScoreLabel];
-    [self shotsFiredLabel];
+-(void)didMoveToView:(SKView *)view {    _score.text = @"0 pt";
+    
+
+    [self setupLabels];
+//    [self addScoreLabel];
+//    [self shotsFiredLabel];
     /* Setup your scene here */
-    SKSpriteNode *groundNode = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(view.frame.size.width, 20)];
+    self.castleActive = NO;
+    SKSpriteNode *groundNode = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(view.frame.size.width+200, 20)];
     groundNode.position = CGPointMake(view.center.x, view.center.y /10);
     groundNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:groundNode.size];
     groundNode.physicsBody.dynamic = NO;
@@ -70,6 +80,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     archerNode.position= CGPointMake(view.center.x/5, view.center.y +100);
     archerNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:archerNode.size];
     NSLog(@"CenterX:%f Center:y %f",view.center.x, view.center.y);
+ 
    
     [self addChild:groundNode];
     [self addChild:archerNode];
@@ -87,19 +98,29 @@ static inline CGPoint rwNormalize(CGPoint a) {
     NSLog(@"touchBegan");
     SKSpriteNode *archer = (SKSpriteNode*)[self childNodeWithName:@"Archer"];
     SKSpriteNode *powerBar = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(10, 10)];
+    
     powerBar.position = CGPointMake(archer.position.x, archer.position.y + 40);
     powerBar.name = @"Powerbar";
     powerBar.anchorPoint = CGPointMake(0.5, 0.0);
     [self addChild:powerBar];
     self.powerBarTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(handlePowerUp:) userInfo:nil repeats:NO];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kazoo.wav", [[NSBundle mainBundle] resourcePath]]];
     
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    
+    if (!self.audioPlayer)
+        NSLog(@"%@",[error localizedDescription]);
+    else
+        [self.audioPlayer play];
     self.StartDate = [NSDate date];
 }
 
 -(void)handlePowerUp:(id)sender
 {
     NSLog(@"Being handled");
-    SKAction *increaseHeight = [SKAction scaleXBy:1 y:10 duration:1];
+    SKAction *increaseHeight = [SKAction scaleXBy:1 y:10 duration:1.5];
     
     SKSpriteNode *powerBar = (SKSpriteNode*)[self childNodeWithName:@"Powerbar"];
     [powerBar runAction:increaseHeight];
@@ -108,13 +129,15 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    [self.audioPlayer stop];
+    [self removeActionForKey:@"action"];
     SKSpriteNode *powerBar = (SKSpriteNode*)[self childNodeWithName:@"Powerbar"];
     [powerBar removeFromParent];
     
-    self.shotsFired ++;
+   // self.shotsFired ++;
     SKNode *shotsFired = [self childNodeWithName:@"shotsFire"];
     [shotsFired removeFromParent];
-    [self shotsFiredLabel];
+    //[self shotsFiredLabel];
                           
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:self.StartDate];
     NSLog(@"Time: %f", ti);
@@ -128,7 +151,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     // 2 - Position the projectile
     SKNode *archer = [self childNodeWithName:@"Archer"];
     SKSpriteNode *projectile = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(10, 10)];
-    projectile.position = CGPointMake(archer.position.x+20, archer.position.y+5);
+    projectile.position = CGPointMake(archer.position.x+30, archer.position.y+10);
     // 3 determine projectile offset to position
     CGPoint offset = rwSub(location, projectile.position);
     projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width/2];
@@ -146,7 +169,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     CGPoint direction = rwNormalize(offset);
     
     // 7 - Make it shoot far enough to be guaranteed off screen
-    float forceValue =  ti * 3; //Edit this value to get the desired force.
+    float forceValue =  ti * 2.66; //Edit this value to get the desired force.
     CGPoint shootAmount = rwMult(direction, forceValue);
     
     //8 - Convert the point to a vector
@@ -170,14 +193,36 @@ static inline CGPoint rwNormalize(CGPoint a) {
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(10, 10)];
     arrow.position = CGPointMake(archer.position.x+5,archer.position.y+5);
 }
+
+
 -(void)update:(CFTimeInterval)currentTime {
+    if ([GameData sharedGameData].score > [GameData sharedGameData].highScore)
+    {   [GameData sharedGameData].highScore = [GameData sharedGameData].score;
+        _highScore.text = [NSString stringWithFormat:@"High:%@", _score.text];
+    }
+    
+    if (self.counter < 0){
+        self.counter = 0;
+    }
+    
+    if (self.counter > 4){
+        SKScene * scene = [GameOverScene sceneWithSize:self.frame.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [GameData sharedGameData].highScore = MAX([GameData sharedGameData].score,
+                                                  [GameData sharedGameData].highScore);
+        [[GameData sharedGameData]save];
+        [[GameData sharedGameData]reset];
+        // Present the scene.
+        [self.view presentScene:scene];
+    }
+    
     /* Called before each frame is rendered */
-    if (self.score >= 2 && self.testNum == 1 ) {
+    if ([GameData sharedGameData].score >= 2 && self.testNum == 1 ) {
         [self.target startUpDownTarget];
         self.testNum = 0;
     }
     
-    if (self.score >=4 && self.testNum == 0) {
+    if ([GameData sharedGameData].score >=4 && self.testNum == 0) {
         
         self.obstacle = [[Obstacle alloc ]init];
         self.obstacle.sceneFrame = self.frame;
@@ -188,12 +233,50 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.testNum = 2;
     }
     
-    if ([self children].count == 30) {
-        // swith to the game over scene 
+    if ([GameData sharedGameData].score< 0){
+        SKScene * scene = [GameOverScene sceneWithSize:self.frame.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [[GameData sharedGameData]reset];
+        // Present the scene.
+        [self.view presentScene:scene];
     }
-
+    if ([GameData sharedGameData].score>= 20 && !self.castleActive){
+        SKSpriteNode *archer = (SKSpriteNode*)[self childNodeWithName:@"Archer"];
+        Castle *castle = [[Castle alloc]init];
+        castle.position = CGPointMake(archer.position.x-9, archer.position.y-5);
+        castle.name = @"Castle";
+        castle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:castle.size];
+        castle.physicsBody.density = 500;
+      
+        [self addChild:castle];
+        SKAction *increaseCastleHeight = [SKAction scaleXBy:1 y:5 duration:1];
+        
+        self.castleActive = YES;
+        [castle runAction:increaseCastleHeight];
+        
+    };
 
 }
+
+#pragma mark -castle code
+
+//if (self.score >= 20 && !self.castleActive){
+//    SKSpriteNode *archer = (SKSpriteNode*)[self childNodeWithName:@"Archer"];
+//    Castle *castle = [[Castle alloc]init];
+//    castle.position = CGPointMake(archer.position.x-9, archer.position.y-5);
+//    castle.name = @"Castle";
+//    castle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:castle.size];
+//    castle.physicsBody.density = 500;
+//    
+//    [self addChild:castle];
+//    SKAction *increaseCastleHeight = [SKAction scaleXBy:1 y:5 duration:1];
+//    
+//    self.castleActive = YES;
+//    [castle runAction:increaseCastleHeight];
+//    
+//};
+
+
 
 // YANA'S CODE:
 //Creating initial position for the target
@@ -202,8 +285,6 @@ static inline CGPoint rwNormalize(CGPoint a) {
         
 //        setting up view
         NSLog(@"Size: %@", NSStringFromCGSize(size));
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-        
 //        set up physics for collision
         self.physicsWorld.contactDelegate = self;
         
@@ -250,8 +331,6 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 
 
-
-
 // contact delegate method
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
@@ -270,19 +349,25 @@ static inline CGPoint rwNormalize(CGPoint a) {
     
     if (firstBody.categoryBitMask == projectileCategory &&
         secondBody.categoryBitMask == targetCategory)
-    {
+    {   self.counter -=2;
+        [GameData sharedGameData].score += 1;
+        _score.text = [NSString stringWithFormat:@"%li pt", [GameData sharedGameData].score];
         [self.target projectile:(SKSpriteNode *) firstBody.node didCollideWithTarget:(SKSpriteNode *) secondBody.node];
     }
     
     if (firstBody.categoryBitMask == projectileCategory &&
              secondBody.categoryBitMask == headCategory)
-    {
+    {   self.counter -=2;
+        [GameData sharedGameData].score += 2;
+        _score.text = [NSString stringWithFormat:@"%li pt", [GameData sharedGameData].score];
         [self.head projectile:(SKSpriteNode *) firstBody.node didCollideWithHead:(SKSpriteNode *) secondBody.node];
     }
     
     if (firstBody.categoryBitMask == projectileCategory &&
         secondBody.categoryBitMask == obstacleCategory)
-    {
+    {   self.counter ++;
+        [GameData sharedGameData].score -= 1;
+        _score.text = [NSString stringWithFormat:@"%li pt", [GameData sharedGameData].score];
         [self.obstacle projectile:(SKSpriteNode *) firstBody.node didCollideWithObst:(SKSpriteNode *) secondBody.node];
     }
 
@@ -295,25 +380,21 @@ static inline CGPoint rwNormalize(CGPoint a) {
     
     
 }
--(void)shotsFiredLabel
+
+-(void)setupLabels
 {
-    SKNode *score = [self childNodeWithName:@"score"];
-    SKLabelNode *shotsFired = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Shots Fired: %d",self.shotsFired]];
+    _score = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+    _score.fontSize = 12.0;
+    _score.position = CGPointMake(self.view.center.x, self.view.center.y+150);
+    _score.fontColor = [SKColor greenColor];
+    _score.text = @"0 pt";
+    [self addChild:_score];
     
-    shotsFired.position = CGPointMake(score.position.x,score.position.y- 40);
-    shotsFired.fontColor = [UIColor blueColor];
-    shotsFired.name = @"shotsFire";
-    [self addChild:shotsFired];
+    _highScore = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+    _highScore.fontSize = 12.0;
+    _highScore.text = [NSString stringWithFormat:@"High: %li pt", [GameData sharedGameData].highScore];
+    _highScore.position = CGPointMake(_score.position.x,_score.position.y-40);
+    _highScore.fontColor = [SKColor redColor];
+    [self addChild:_highScore];
 }
-
--(void)addScoreLabel{
-    
-    SKLabelNode *scoreNode = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %d",self.score]];
-    
-    scoreNode.position = CGPointMake(self.view.center.x,self.view.center.y+ 150);
-    scoreNode.fontColor = [UIColor blueColor];
-    scoreNode.name = @"score";
-    [self addChild:scoreNode];
-}
-
 @end

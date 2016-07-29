@@ -8,7 +8,7 @@
 
 #import "Obstacle.h"
 #import "GameScene.h"
-
+#import "GameData.h"
 @interface Obstacle ()
 
 //@property Obstacle* spawnedObstacle;
@@ -81,10 +81,10 @@
                                                [SKAction scaleTo: 1.0 duration:0.1]]];
     [self runAction: zoomInOut];
   
+    
+    SKAction *soundAction = [SKAction playSoundFileNamed:@"woosh.wav" waitForCompletion:NO];
+    [self runAction:soundAction];
 
-    self.gameScene.score --;
-    SKLabelNode *score = (SKLabelNode*)[self.gameScene childNodeWithName:@"score"];
-    score.text = [NSString stringWithFormat:@"Score: %i", self.gameScene.score];
     
   
 //    create new obstacle

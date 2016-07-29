@@ -10,6 +10,15 @@
 		9726CC5E1D49622A000FE536 /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726CC5D1D49622A000FE536 /* Target.m */; };
 		9726CC611D497323000FE536 /* Head.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726CC601D497323000FE536 /* Head.m */; };
 		9767385C1D49278F00158C06 /* Obstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9767385B1D49278F00158C06 /* Obstacle.m */; };
+		AB18C1D91D4A9B39005BD98D /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AB18C1D61D4A9B39005BD98D /* MenuScene.m */; };
+		AB18C1DA1D4A9B39005BD98D /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AB18C1D81D4A9B39005BD98D /* GameOverScene.m */; };
+		AB18C1DD1D4A9E43005BD98D /* Castle.m in Sources */ = {isa = PBXBuildFile; fileRef = AB18C1DC1D4A9E43005BD98D /* Castle.m */; };
+		AB18C1DF1D4AAE02005BD98D /* kazoo.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB18C1DE1D4AAE02005BD98D /* kazoo.wav */; };
+		AB18C1E11D4AB209005BD98D /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB18C1E01D4AB209005BD98D /* ding.wav */; };
+		AB18C1E31D4AB342005BD98D /* ping.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB18C1E21D4AB342005BD98D /* ping.wav */; };
+		AB18C1E61D4AB4B5005BD98D /* woosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB18C1E51D4AB4B5005BD98D /* woosh.wav */; };
+		AB18C1E91D4AE6C2005BD98D /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = AB18C1E81D4AE6C2005BD98D /* Monster.m */; };
+		AB18C1EC1D4AF405005BD98D /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB18C1EB1D4AF405005BD98D /* GameData.m */; };
 		ABC7F7D11D47B53F00811646 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D01D47B53F00811646 /* main.m */; };
 		ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D31D47B53F00811646 /* AppDelegate.m */; };
 		ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7F7D61D47B53F00811646 /* GameScene.m */; };
@@ -46,6 +55,21 @@
 		9726CC601D497323000FE536 /* Head.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Head.m; sourceTree = "<group>"; };
 		9767385A1D49278F00158C06 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		9767385B1D49278F00158C06 /* Obstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Obstacle.m; sourceTree = "<group>"; };
+		AB18C1D51D4A9B39005BD98D /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		AB18C1D61D4A9B39005BD98D /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		AB18C1D71D4A9B39005BD98D /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		AB18C1D81D4A9B39005BD98D /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		AB18C1DB1D4A9E43005BD98D /* Castle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Castle.h; sourceTree = "<group>"; };
+		AB18C1DC1D4A9E43005BD98D /* Castle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Castle.m; sourceTree = "<group>"; };
+		AB18C1DE1D4AAE02005BD98D /* kazoo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kazoo.wav; sourceTree = "<group>"; };
+		AB18C1E01D4AB209005BD98D /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
+		AB18C1E21D4AB342005BD98D /* ping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ping.wav; sourceTree = "<group>"; };
+		AB18C1E41D4AB41E005BD98D /* woosh.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = woosh.flac; sourceTree = "<group>"; };
+		AB18C1E51D4AB4B5005BD98D /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
+		AB18C1E71D4AE6C2005BD98D /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
+		AB18C1E81D4AE6C2005BD98D /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
+		AB18C1EA1D4AF405005BD98D /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
+		AB18C1EB1D4AF405005BD98D /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
 		ABC7F7CC1D47B53F00811646 /* ArcheryPhysics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcheryPhysics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7F7D01D47B53F00811646 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABC7F7D21D47B53F00811646 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -119,10 +143,25 @@
 				ABC7F7D31D47B53F00811646 /* AppDelegate.m */,
 				ABC7F7D51D47B53F00811646 /* GameScene.h */,
 				ABC7F7D61D47B53F00811646 /* GameScene.m */,
+				AB18C1EA1D4AF405005BD98D /* GameData.h */,
+				AB18C1EB1D4AF405005BD98D /* GameData.m */,
+				AB18C1E71D4AE6C2005BD98D /* Monster.h */,
+				AB18C1E81D4AE6C2005BD98D /* Monster.m */,
+				AB18C1DB1D4A9E43005BD98D /* Castle.h */,
+				AB18C1DE1D4AAE02005BD98D /* kazoo.wav */,
+				AB18C1DC1D4A9E43005BD98D /* Castle.m */,
 				ABC7F7D81D47B53F00811646 /* GameScene.sks */,
 				ABC7F7DA1D47B53F00811646 /* GameViewController.h */,
 				ABC7F7DB1D47B53F00811646 /* GameViewController.m */,
+				AB18C1E01D4AB209005BD98D /* ding.wav */,
+				AB18C1D51D4A9B39005BD98D /* MenuScene.h */,
+				AB18C1D61D4A9B39005BD98D /* MenuScene.m */,
+				AB18C1D71D4A9B39005BD98D /* GameOverScene.h */,
+				AB18C1E41D4AB41E005BD98D /* woosh.flac */,
+				AB18C1E21D4AB342005BD98D /* ping.wav */,
+				AB18C1D81D4A9B39005BD98D /* GameOverScene.m */,
 				9767385A1D49278F00158C06 /* Obstacle.h */,
+				AB18C1E51D4AB4B5005BD98D /* woosh.wav */,
 				9726CC5C1D49622A000FE536 /* Target.h */,
 				9726CC5F1D497323000FE536 /* Head.h */,
 				9726CC601D497323000FE536 /* Head.m */,
@@ -230,7 +269,7 @@
 				TargetAttributes = {
 					ABC7F7CB1D47B53F00811646 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 3GK93FXZZ6;
+						DevelopmentTeam = 7HD7CFYP99;
 					};
 					ABC7F7E91D47B53F00811646 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -267,10 +306,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB18C1E11D4AB209005BD98D /* ding.wav in Resources */,
 				ABC7F7D91D47B53F00811646 /* GameScene.sks in Resources */,
+				AB18C1E31D4AB342005BD98D /* ping.wav in Resources */,
 				ABC7F7E41D47B53F00811646 /* LaunchScreen.storyboard in Resources */,
 				ABC7F7E11D47B53F00811646 /* Assets.xcassets in Resources */,
+				AB18C1E61D4AB4B5005BD98D /* woosh.wav in Resources */,
 				ABC7F7DF1D47B53F00811646 /* Main.storyboard in Resources */,
+				AB18C1DF1D4AAE02005BD98D /* kazoo.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,10 +339,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC7F7DC1D47B53F00811646 /* GameViewController.m in Sources */,
+				AB18C1DA1D4A9B39005BD98D /* GameOverScene.m in Sources */,
+				AB18C1E91D4AE6C2005BD98D /* Monster.m in Sources */,
+				AB18C1D91D4A9B39005BD98D /* MenuScene.m in Sources */,
 				9726CC611D497323000FE536 /* Head.m in Sources */,
 				ABC7F7D41D47B53F00811646 /* AppDelegate.m in Sources */,
 				9726CC5E1D49622A000FE536 /* Target.m in Sources */,
 				9767385C1D49278F00158C06 /* Obstacle.m in Sources */,
+				AB18C1DD1D4A9E43005BD98D /* Castle.m in Sources */,
+				AB18C1EC1D4AF405005BD98D /* GameData.m in Sources */,
 				ABC7F7D71D47B53F00811646 /* GameScene.m in Sources */,
 				ABC7F7D11D47B53F00811646 /* main.m in Sources */,
 			);
@@ -446,7 +494,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ArcheryPhysics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysics;
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.apples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -460,7 +508,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ArcheryPhysics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bananas.ArcheryPhysics;
+				PRODUCT_BUNDLE_IDENTIFIER = bananas.apples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
