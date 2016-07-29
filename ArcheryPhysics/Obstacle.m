@@ -20,7 +20,7 @@
 
 
 -(instancetype)init {
-    self = [super initWithColor:[SKColor blueColor] size:CGSizeMake(40, 40)];
+    self = [super initWithColor:[SKColor redColor] size:CGSizeMake(40, 40)];
     if (self) {
         
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];

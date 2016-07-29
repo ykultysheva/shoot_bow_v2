@@ -14,7 +14,7 @@
 
 
 -(instancetype)init {
-    self = [super initWithColor:[SKColor redColor] size:CGSizeMake(40, 80)];
+    self = [super initWithColor:[SKColor blueColor] size:CGSizeMake(40, 80)];
     if (self) {
     }
     return self;

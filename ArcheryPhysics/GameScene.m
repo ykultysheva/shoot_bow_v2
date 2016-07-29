@@ -233,6 +233,19 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.testNum = 2;
     }
     
+    if ([GameData sharedGameData].score >=10 && self.testNum == 2){
+        
+        Obstacle *newObstacle = [[Obstacle alloc]init];
+        newObstacle.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:newObstacle];
+        SKAction *moveLeft = [SKAction moveByX:-50 y:0 duration:1];
+        SKAction *moveRight = [SKAction moveByX:100 y:0 duration:2];
+        SKAction *actionSequence = [SKAction sequence:@[moveLeft,moveRight,moveLeft]];
+        SKAction *repeatAction = [SKAction repeatActionForever:actionSequence];
+        [newObstacle runAction:repeatAction];
+        self.testNum = 3;
+    }
+    
     if ([GameData sharedGameData].score< 0){
         SKScene * scene = [GameOverScene sceneWithSize:self.frame.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;

@@ -28,11 +28,11 @@
 
 - (void)createSceneContents
 {   self.anchorPoint = CGPointMake(0.5,0.5);
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"shapes1"];
-    self.backgroundColor = [UIColor whiteColor];
-    sprite.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-100);
+//    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"shapes1"];
+//    self.backgroundColor = [UIColor whiteColor];
+//    sprite.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-100);
     self.scaleMode = SKSceneScaleModeAspectFit;
-    [self addChild: sprite];
+//    [self addChild: sprite];
     [self addChild: [self createMenu]];
 }
 

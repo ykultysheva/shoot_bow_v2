@@ -13,7 +13,7 @@
 @implementation Head
 
 -(instancetype)init {
-    self = [super initWithColor:[SKColor orangeColor] size:CGSizeMake(40, 40)];
+    self = [super initWithColor:[SKColor cyanColor] size:CGSizeMake(40, 40)];
     if (self) {
     }
     return self;
@@ -33,7 +33,9 @@
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithHead:(SKSpriteNode *)head {
     NSLog(@"Hit Head");
     SKAction *soundAction = [SKAction playSoundFileNamed:@"ping.wav" waitForCompletion:NO];
-    [self runAction:soundAction];
+    SKAction *delayedSound = [SKAction waitForDuration:.3];
+    SKAction *soundSequence = [SKAction sequence:@[soundAction, delayedSound, soundAction]];
+    [self runAction:soundSequence];
     [projectile removeFromParent];
     
     SKSpriteNode *obstacle = (SKSpriteNode*)[self childNodeWithName:@"//SpawnedObstacle"];
